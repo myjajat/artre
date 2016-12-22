@@ -29,10 +29,10 @@ $row = $query->row();
     <div class="story-date">
         <time><? echo date("d F Y", strtotime($row->insert_date)); ?></time>
     </div>
-    <article>
-        <? echo $row->story; ?>
-    </article>
     <div class="story-cover">
         <img src="<? echo base_url('assets/images/stories/'.$row->cover) ?>" width="100%" />
     </div>
+    <article>
+        <? echo $row->story; ?>
+    </article>
 </section>

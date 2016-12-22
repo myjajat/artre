@@ -125,7 +125,7 @@ class Administrator extends CI_Controller {
         
         if (isset($_POST['title']) && $upload['msg'] == ''){
             $this->db->set('title', $this->input->post('title', true));
-            $this->db->set('story', $this->input->post('story', true));
+            $this->db->set('story', $this->input->post('story'));
             $this->db->set('creator', $this->input->post('creator', true));
             $this->db->set('link', $this->input->post('link', true));
             $this->db->where('id_story', $id_story);

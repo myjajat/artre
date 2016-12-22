@@ -45,7 +45,7 @@ if (isset($er_msg)){
             </div>
             <div class="form-group">
                 <label>Story</label>
-                <textarea name="story" class="" id="texteditor" required=""><? echo $story; ?></textarea>
+                <textarea name="story" class="texteditor" required=""><? echo $story; ?></textarea>
             </div>
             <div class="form-group">
                 <label>Cover</label>
@@ -64,6 +64,6 @@ if (isset($er_msg)){
 
 <script>
     $(document).ready(function() {
-        CKEDITOR.replace('texteditor');
+        
     });
 </script>
