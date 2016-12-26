@@ -6,6 +6,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @copyright 2016 moegi
  */
 
+$name       = $this->input->post('name');
+$price      = $this->input->post('price');
+$discount   = $this->input->post('discount');
+$category   = $this->input->post('category');
+$color      = $this->input->post('color');
+$desc       = $this->input->post('description');
+$spec       = $this->input->post('specification');
+
+$name       = empty($name)? $row->name : $name;
+$price      = empty($price)? $row->price : $price;
+$discount   = empty($discount)? $row->discount : $discount;
+$category   = empty($category)? $row->id_category : $category;
+$color      = empty($color)? $row->colors : $color;
+$desc       = empty($desc)? $row->backstories : $desc;
+$spec       = empty($spec)? $row->specification : $spec;
+
 if (isset($er_msg)){
     echo $this->mylib->create_msg($er_msg, 'danger');
 }
@@ -13,40 +29,42 @@ if (isset($er_msg)){
 ?>
 
 <!-- Main content -->
-    <div class="box box-success">
+<div class="box box-success">
     <form method="post" action="" enctype="multipart/form-data">
         <div class="box-header with-border">
-            <h3 class="box-title">New Product</h3>
+            <h3 class="box-title">Edit Product</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
             <div class="form-group">
                 <label>Product's Name</label>
-                <input type="text" name="name" class="form-control" value="" maxlength="100" required="" />
+                <input type="text" name="name" class="form-control" value="<? echo $name; ?>" maxlength="100" required="" />
             </div>
             <div class="form-group">
                 <label>Price</label>
                 <div class="input-group">
                     <span class="input-group-addon">Rp.</span>
-                    <input type="number" class="form-control" name="price" value="" min="0" required="" />
+                    <input type="number" class="form-control" name="price" value="<? echo $price; ?>" min="0" required="" />
                 </div>
             </div>
             <div class="form-group">
                 <label>Discount</label>
                 <div class="input-group">
                     <span class="input-group-addon">Rp.</span>
-                    <input type="number" class="form-control" name="discount" value="" />
+                    <input type="number" class="form-control" name="discount" value="<? echo $discount; ?>" />
                 </div>
             </div>
             <div class="form-group ">
                 <label>Category</label>
                 <select name="category" class="form-control" required>
-                    <? foreach ($category->result() as $row){
-                        echo "<option value='$row->id_category'>$row->category</option>";
+                    <? foreach ($categories->result() as $row){
+                        $selected = $row->id_category == $category ? "selected" : "";
+                        echo "<option value='$row->id_category' $selected>$row->category</option>";
                     }?>
                 </select>
             </div>
             <div class="form-group ">
+                <input type="hidden" id="color" value="<? echo $color; ?>">
                 <label>Colors</label>
                 <select name="color[]" id="multiple" class="form-control select2-multiple" multiple="multiple">
                     <option value="#000000">Black</option>
@@ -64,11 +82,11 @@ if (isset($er_msg)){
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" class="texteditor" id="desc_texteditor" required=""></textarea>
+                <textarea name="description" class="texteditor" id="desc_texteditor" required=""><? echo $desc; ?></textarea>
             </div>
             <div class="form-group">
                 <label>Spesification</label>
-                <textarea name="specification" class="texteditor" id="spesc_texteditor" required=""></textarea>
+                <textarea name="specification" class="texteditor" id="spesc_texteditor" required=""><? echo $spec; ?></textarea>
             </div>
             <div class="form-group">
                 <label>Cover</label>
@@ -81,7 +99,7 @@ if (isset($er_msg)){
             <a href="<? echo site_url('administrator/products'); ?>" class="btn btn-default">Cancel</a>
         </div>
     </form>
-    </div>
+</div>
 <!-- /.content -->
 
 <script type="text/javascript">
@@ -92,5 +110,10 @@ if (isset($er_msg)){
         });
         CKEDITOR.replace('desc_texteditor');
         CKEDITOR.replace('spesc_texteditor');
+    });
+
+    var value = $('#color').val();
+    $.each(value.split(","), function(i,e){
+        $("#multiple option[value='" + e + "']").prop("selected", true);
     });
 </script>
