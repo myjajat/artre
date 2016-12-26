@@ -27,6 +27,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- select 2 bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <link href="https://select2.github.io/select2-bootstrap-theme/css/select2-bootstrap.css" rel="stylesheet" />
+    <!-- include summernote css-->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -119,6 +121,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+<!-- include summernote js-->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
      
 <script src="<? echo base_url('assets/js/main.js') ?>"></script>
 
@@ -137,10 +141,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });*/
     
     $("#<? echo $this->uri->segment(2) ?>").addClass("active");
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    //CKEDITOR.replace('textarea1');
-    //CKEDITOR.replace('textarea2');
+    $('.texteditor').summernote({
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol']],
+        ['insert', ['link', 'picture', 'video']]
+      ]
+    });
   });
 </script>
 </body>

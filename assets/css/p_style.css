@@ -167,4 +167,9 @@ body {
 .story-date {
     text-align: center;
     color: silver;
+    font-size: 0.8em;
+}
+
+.story-cover {
+    margin-top: 20px;
 }
