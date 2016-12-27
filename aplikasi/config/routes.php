@@ -56,3 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['administrator/story/add'] = 'administrator/story_add';
 $route['administrator/story/edit/(:num)'] = 'administrator/story_edit/$1';
 $route['administrator/product/add'] = 'administrator/product_add';
+$route['administrator/product/(:num)/photos'] = 'administrator/product_photos/$1';

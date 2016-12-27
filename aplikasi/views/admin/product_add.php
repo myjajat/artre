@@ -6,13 +6,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @copyright 2016 moegi
  */
  
-//$title = $this->input->post('title');
-//$story = $this->input->post('story');
-//$creator = $this->input->post('creator');
+$name = $this->input->post('name');
+$price = $this->input->post('price');
+$discount = $this->input->post('discount');
+$colors = $this->input->post('colors');
+$backstories = $this->input->post('backstories');
+$specification = $this->input->post('specification');
+$id_category = $this->input->post('category');
 
-//if (isset($er_msg)){
-//    echo $this->mylib->create_msg($er_msg, 'danger');
-//}
+if (isset($er_msg)){
+    echo $this->mylib->create_msg($er_msg, 'danger');
+}
 
 ?>
 
@@ -26,38 +30,56 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="box-body">
             <div class="form-group">
                 <label>Product's Name</label>
-                <input type="text" name="name" class="form-control" value="<? //echo $title; ?>" maxlength="100" required="" />
+                <input type="text" name="name" class="form-control" value="<? echo $name; ?>" maxlength="100" required="" />
             </div>
             <div class="form-group">
-                <label>Price</label>
-                <div class="input-group">
-                    <span class="input-group-addon">Rp.</span>
-                    <input type="number" class="form-control" name="price" value="" min="0" required="" />
+                <label>Category</label>
+                <select name="category" class="form-control">
+                    <option value="">-- select --</option>
+                <?
+                    foreach ($list_categories->result() as $row){
+                        echo '<option value="'.$row->id_category.'">';
+                        echo $row->category;
+                        echo '</option>';
+                    }
+                ?>
+                </select>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Original Price</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">Rp.</span>
+                        <input type="number" class="form-control" name="price" value="<? echo $price; ?>" min="0" required="" />
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>Discount Price</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">Rp.</span>
+                        <input type="number" class="form-control" name="discount" value="<? echo $discount; ?>" min="0" />
+                    </div>
                 </div>
             </div>
             <div class="form-group ">
                 <label>Colors</label>
-                <select name="color" id="multiple" class="form-control select2-multiple" multiple="multiple">
-                    <option value="#000000">Black</option>
-                    <option value="#ffffff">White</option>
-                    <option value="#ff0000">Red</option>
-                    <option value="#00ff00">Green</option>
-                    <option value="#0000ff">Blue</option>
-                    <option value="#ffff00">Yellow</option>
-                    <option value="#8800ff">Purple</option>
-                    <option value="#ff0088">Pink</option>
-                    <option value="#ff8800">Orange</option>
-                    <option value="#884400">Brown</option>
-                    <option value="#888888">Gray</option>
+                <select name="colors[]" id="multiple" class="form-control select2-multiple" multiple="multiple">
+                <?
+                    foreach ($list_colors->result() as $row){
+                        echo '<option value="'.$row->color_kode.'">';
+                        echo $row->color_name;
+                        echo '</option>';
+                    }
+                ?>
                 </select>
             </div>
             <div class="form-group">
-                <label>Description</label>
-                <textarea name="description" class="texteditor" id="texteditor" required=""><? //echo $story; ?></textarea>
+                <label>Backstories</label>
+                <textarea name="backstories" class="texteditor" required=""><? echo $backstories; ?></textarea>
             </div>
             <div class="form-group">
-                <label>Cover</label>
-                <input type="file" name="cover" required="" />
+                <label>Specification</label>
+                <textarea name="specification" class="texteditor" required=""><? echo $specification; ?></textarea>
             </div>
         </div>
         <!-- /.box-body -->
@@ -73,8 +95,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $(document).ready(function() {
         $('.select2-multiple').select2({
             theme: "bootstrap",
-            width: null
+            width: null,
+            placeholder: '-- select --'
         });
-        CKEDITOR.replace('texteditor');
     });
 </script>

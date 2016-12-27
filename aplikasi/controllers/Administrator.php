@@ -189,37 +189,65 @@ class Administrator extends CI_Controller {
         $offset = $limit * ($page - 1);
         
         $this->db->order_by('insert_date', 'DESC');
-        $data['query'] = $this->db->get('products', $limit, $offset);
+        $sql = "SELECT products.*, categories.category
+                FROM products
+                LEFT JOIN categories
+                ON products.id_category = categories.id_category
+                ORDER BY id_product DESC
+                LIMIT $offset, $limit";
+        $data['query'] = $this->db->query($sql);
         $this->show_page('admin/products', $data);
     }
     
     public function product_add(){
-        
-        $title = $this->input->post('title');
-        $story = $this->input->post('story');
-        $creator = $this->input->post('creator');
         $data  = null;
+        $name = $this->input->post('name');
+        $price = $this->input->post('price');
+        $discount = $this->input->post('discount');
+        $colors = $this->input->post('colors');
+        $backstories = $this->input->post('backstories');
+        $specification = $this->input->post('specification');
+        $id_category = $this->input->post('category');
         
-        if (!empty($title) and !empty($story)){
-            $upload = $this->upload_image('cover', 'stories');
-            if ($upload['success']){
-                $this->db->set('cover', $upload['file_name']);
-                $this->db->set('title', $title);
-                $this->db->set('story', $story);
-                $this->db->set('creator', $creator);
-                $this->db->insert('stories');
-                if ($this->db->affected_rows() > 0){
-                    $this->session->set_flashdata('msg', 'New story successfully published.');
-                    $this->session->set_flashdata('msg_type', 'success');
-                    redirect('administrator/stories');
-                } else {
-                    $data['er_msg'] = 'Sorry, something error on saving new story.';
-                }
+        if (isset($_POST['name'])){
+            $this->db->set('name', $name);
+            $this->db->set('price', $price);
+            $this->db->set('discount', $discount);
+            $this->db->set('colors', implode(',',$colors));
+            $this->db->set('backstories', $backstories);
+            $this->db->set('specification', $specification);
+            $this->db->set('id_category', $id_category);
+            $this->db->insert('products');
+            if ($this->db->affected_rows() > 0){
+                $id_product = $this->db->insert_id();
+                $this->session->set_flashdata('msg', 'New product successfully created. Upload some photos of the product!');
+                $this->session->set_flashdata('msg_type', 'success');
+                redirect('administrator/product/'.$id_product.'/photos');
             } else {
-                $data['er_msg'] = $upload['msg'];
+                $data['er_msg'] = 'Sorry, something error on saving new product.';
             }
         }
+        
+        $data['list_categories'] = $this->db->get('categories');
+        $data['list_colors'] = $this->db->get('colors');
         $this->show_page('admin/product_add', $data);
+    }
+    
+    public function product_photos($id_product){
+        $this->db->where('id_product',$id_product);
+        $query = $this->db->get('products','1');
+        if ($query->num_rows() != 1){
+            $this->session->set_flashdata('msg', 'Product not found!');
+            $this->session->set_flashdata('msg_type', 'danger');
+            redirect('administrator/products');
+        } else {
+            //$row = 
+        }
+        
+        $this->db->where('id_product', $id_product);
+        $query = $this->db->get('products_photo');
+        $data['query'] = $query;
+        $this->show_page('admin/products_photo', $data);
     }
     
     public function tes(){
