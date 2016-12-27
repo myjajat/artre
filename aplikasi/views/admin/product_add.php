@@ -61,6 +61,21 @@ if (isset($er_msg)){
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <label>Discount</label>
+                <div class="input-group">
+                    <span class="input-group-addon">Rp.</span>
+                    <input type="number" class="form-control" name="discount" value="" />
+                </div>
+            </div>
+            <div class="form-group ">
+                <label>Category</label>
+                <select name="category" class="form-control" required>
+                    <? foreach ($category->result() as $row){
+                        echo "<option value='$row->id_category'>$row->category</option>";
+                    }?>
+                </select>
+            </div>
             <div class="form-group ">
                 <label>Colors</label>
                 <select name="colors[]" id="multiple" class="form-control select2-multiple" multiple="multiple">
@@ -85,7 +100,7 @@ if (isset($er_msg)){
         <!-- /.box-body -->
         <div class="box-footer">
             <button type="submit" class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-disk"></span> Save</button>
-            <a href="<? echo site_url('administrator/stories'); ?>" class="btn btn-default">Cancel</a>            
+            <a href="<? echo site_url('administrator/products'); ?>" class="btn btn-default">Cancel</a>
         </div>
     </form>
     </div>
