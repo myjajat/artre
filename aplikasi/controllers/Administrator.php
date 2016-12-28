@@ -234,6 +234,20 @@ class Administrator extends CI_Controller {
     }
     
     public function product_photos($id_product){
+        if (isset($_POST['delete']) and $this->input->post('id_photo') != ''){
+            $this->db->where('id_photo', $this->input->post('id_photo', true));
+            $this->db->limit(1);
+            $this->db->delete('products_photo');
+            if ($this->db->affected_rows() != 0){
+                $this->session->set_flashdata('msg', '1 photo successfully deleted.');
+                $this->session->set_flashdata('msg_type', 'info');
+            } else {
+                $this->session->set_flashdata('msg', 'Something error on deleting photo.');
+                $this->session->set_flashdata('msg_type', 'danger');
+            }
+            redirect('administrator/product/'.$id_product.'/photos');
+        }
+        
         $this->db->where('id_product',$id_product);
         $query = $this->db->get('products','1');
         if ($query->num_rows() != 1){
@@ -241,17 +255,46 @@ class Administrator extends CI_Controller {
             $this->session->set_flashdata('msg_type', 'danger');
             redirect('administrator/products');
         } else {
-            //$row = 
+            $row = $query->row();
+            $data['id_product'] = $row->id_product;
+            $data['name'] = $row->name;
         }
-        
-        $this->db->where('id_product', $id_product);
-        $query = $this->db->get('products_photo');
-        $data['query'] = $query;
         $this->show_page('admin/products_photo', $data);
     }
     
     public function tes(){
         $this->show_page('admin/tes');
+    }
+    
+    public function ajax_photo_product($id_product){
+        $this->db->where('id_product', $id_product);
+        $query = $this->db->get('products_photo');
+                
+        if ($query->num_rows() == 0){
+            echo $this->mylib->create_msg('No photo uploaded');
+        }
+        
+        foreach ($query->result() as $row){
+            echo '<div class="photo-frame">';
+            echo '<img src="'.base_url('assets/images/products/'.$row->filename).'"/>';
+            echo '<a href="#" title="delete" class="photo-delete" data-toggle="modal" data-target=".modal" onclick="$(\'#id_photo\').val('.$row->id_photo.');">';
+            echo '<span class="glyphicon glyphicon-trash"></span>';
+            echo '</a>';
+            echo '</div>';
+        }
+    }
+    
+    public function ajax_photo_product_upload(){
+        $upload = $this->upload_image('userfile','products');
+        if ($upload['success']){
+            $id_product = $this->input->post('id_product');
+            $this->db->set('id_product', $id_product);
+            $this->db->set('filename', $upload['file_name']);
+            $this->db->insert('products_photo');
+            if ($this->db->affected_rows() != 0){
+                echo $upload['file_name'];
+            }
+        }
     }
 }
 ?>

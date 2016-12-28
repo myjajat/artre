@@ -173,3 +173,8 @@ body {
 .story-cover {
     margin-top: 20px;
 }
+
+.list-photo-product {
+    margin: 10px;
+    height: 100px;
+}

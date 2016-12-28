@@ -22,7 +22,7 @@ if (isset($er_msg)){
 
 <!-- Main content -->
     <div class="box box-success">
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="post" action="">
         <div class="box-header with-border">
             <h3 class="box-title">New Product</h3>
         </div>
