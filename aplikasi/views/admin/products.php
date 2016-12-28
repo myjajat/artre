@@ -47,6 +47,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     echo "<td>".$row->category."</td>";
                     echo "<td>".$row->price."</td>";
                     echo "<td align='center'>";
+                    echo "<a href='".site_url('administrator/product/'.$row->id_product.'/photos')."' class='label label-default' style='padding: 5px 7px;' title='edit'><span class='glyphicon glyphicon-camera'></span></a>";
+                    echo "&nbsp;";
                     echo "<a href='".site_url('administrator/product/edit/'.$row->id_product)."' class='label label-success' style='padding: 5px 7px;' title='edit'><span class='glyphicon glyphicon-pencil'></span></a>";
                     echo "&nbsp;";
                     echo "<a href='#' class='label label-danger' style='padding: 5px 7px;' title='delete' data-toggle='modal' data-target='.modal' onclick='del(".$row->id_product.")'><span class='glyphicon glyphicon-trash'></span></a>";

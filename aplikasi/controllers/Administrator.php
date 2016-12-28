@@ -296,5 +296,41 @@ class Administrator extends CI_Controller {
             }
         }
     }
+
+    public function product_edit($id_product){
+        $this->db->where('id_product',$id_product);
+        $query = $this->db->get('products', 1);
+        if ($query->num_rows() == 0){
+            $this->session->set_flashdata('msg', 'Product not found');
+            $this->session->set_flashdata('msg_type', 'danger');
+            redirect('administrator/products');
+        }
+
+        if (isset($_POST['name'])){
+            $this->db->set('name', $this->input->post('name'));
+            $this->db->set('price', $this->input->post('price'));
+            $this->db->set('discount', $this->input->post('discount'));
+            $this->db->set('colors', implode(',',$this->input->post('colors')));
+            $this->db->set('backstories', $this->input->post('backstories'));
+            $this->db->set('specification', $this->input->post('specification'));
+            $this->db->set('id_category', $this->input->post('category'));
+            $this->db->where('id_product',$id_product);
+            $this->db->limit(1);
+            $this->db->update('products');
+            if ($this->db->affected_rows() == 1){
+                $this->session->set_flashdata('msg', '1 product successfully edited.');
+                $this->session->set_flashdata('msg_type', 'success');
+                redirect('administrator/products');
+            } else {
+                $data['er_msg'] = "Something error on saving data.";
+            }
+        }
+
+        $data['row'] = $query->row();
+        $data['list_categories'] = $this->db->get('categories');
+        $data['list_colors'] = $this->db->get('colors');
+        $this->show_page('admin/product_edit', $data);
+        return;
+    }
 }
 ?>

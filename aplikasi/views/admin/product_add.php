@@ -65,7 +65,7 @@ if (isset($er_msg)){
                 <label>Discount</label>
                 <div class="input-group">
                     <span class="input-group-addon">Rp.</span>
-                    <input type="number" class="form-control" name="discount" value="" />
+                    <input type="number" class="form-control" name="discount2" value="" />
                 </div>
             </div>
             <div class="form-group ">

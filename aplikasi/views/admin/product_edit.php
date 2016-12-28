@@ -6,21 +6,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @copyright 2016 moegi
  */
 
-$name       = $this->input->post('name');
-$price      = $this->input->post('price');
-$discount   = $this->input->post('discount');
-$category   = $this->input->post('category');
-$color      = $this->input->post('color');
-$desc       = $this->input->post('description');
-$spec       = $this->input->post('specification');
+$name = $this->input->post('name');
+$price = $this->input->post('price');
+$discount = $this->input->post('discount');
+$colors = $this->input->post('colors');
+$backstories = $this->input->post('backstories');
+$specification = $this->input->post('specification');
+$id_category = $this->input->post('category');
 
-$name       = empty($name)? $row->name : $name;
-$price      = empty($price)? $row->price : $price;
-$discount   = empty($discount)? $row->discount : $discount;
-$category   = empty($category)? $row->id_category : $category;
-$color      = empty($color)? $row->colors : $color;
-$desc       = empty($desc)? $row->backstories : $desc;
-$spec       = empty($spec)? $row->specification : $spec;
+$name = empty($name)? $row->name : $name;
+$price = empty($price)? $row->price : $price;
+$discount = empty($discount)? $row->discount : $discount;
+$colors = empty($colors)? $row->colors : $colors;
+$backstories = empty($backstories)? $row->backstories : $backstories;
+$specification = empty($specification)? $row->specification : $specification;
+$id_category = empty($specification)? $row->id_category : $id_category;
 
 if (isset($er_msg)){
     echo $this->mylib->create_msg($er_msg, 'danger');
@@ -30,7 +30,7 @@ if (isset($er_msg)){
 
 <!-- Main content -->
 <div class="box box-success">
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="post" action="">
         <div class="box-header with-border">
             <h3 class="box-title">Edit Product</h3>
         </div>
@@ -41,56 +41,62 @@ if (isset($er_msg)){
                 <input type="text" name="name" class="form-control" value="<? echo $name; ?>" maxlength="100" required="" />
             </div>
             <div class="form-group">
-                <label>Price</label>
-                <div class="input-group">
-                    <span class="input-group-addon">Rp.</span>
-                    <input type="number" class="form-control" name="price" value="<? echo $price; ?>" min="0" required="" />
+                <label>Category</label>
+                <select name="category" class="form-control">
+                    <option value="">-- select --</option>
+                    <?
+                    foreach ($list_categories->result() as $row){
+                        $selected = $row->id_category == $id_category ? "selected" : "";
+                        echo '<option value="'.$row->id_category.'" '.$selected.'>';
+                        echo $row->category;
+                        echo '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label>Original Price</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">Rp.</span>
+                        <input type="number" class="form-control" name="price" value="<? echo $price; ?>" min="0" required="" />
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label>Discount Price</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">Rp.</span>
+                        <input type="number" class="form-control" name="discount" value="<? echo $discount; ?>" min="0" />
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <label>Discount</label>
                 <div class="input-group">
                     <span class="input-group-addon">Rp.</span>
-                    <input type="number" class="form-control" name="discount" value="<? echo $discount; ?>" />
+                    <input type="number" class="form-control" name="discount2" value="" />
                 </div>
             </div>
             <div class="form-group ">
-                <label>Category</label>
-                <select name="category" class="form-control" required>
-                    <? foreach ($categories->result() as $row){
-                        $selected = $row->id_category == $category ? "selected" : "";
-                        echo "<option value='$row->id_category' $selected>$row->category</option>";
-                    }?>
-                </select>
-            </div>
-            <div class="form-group ">
-                <input type="hidden" id="color" value="<? echo $color; ?>">
+                <input type="hidden" id="color" value="<? echo $colors; ?>">
                 <label>Colors</label>
-                <select name="color[]" id="multiple" class="form-control select2-multiple" multiple="multiple">
-                    <option value="#000000">Black</option>
-                    <option value="#ffffff">White</option>
-                    <option value="#ff0000">Red</option>
-                    <option value="#00ff00">Green</option>
-                    <option value="#0000ff">Blue</option>
-                    <option value="#ffff00">Yellow</option>
-                    <option value="#8800ff">Purple</option>
-                    <option value="#ff0088">Pink</option>
-                    <option value="#ff8800">Orange</option>
-                    <option value="#884400">Brown</option>
-                    <option value="#888888">Gray</option>
+                <select name="colors[]" id="multiple" class="form-control select2-multiple" multiple="multiple">
+                    <?
+                    foreach ($list_colors->result() as $row){
+                        echo '<option value="'.$row->color_kode.'">';
+                        echo $row->color_name;
+                        echo '</option>';
+                    }
+                    ?>
                 </select>
             </div>
             <div class="form-group">
-                <label>Description</label>
-                <textarea name="description" class="texteditor" id="desc_texteditor" required=""><? echo $desc; ?></textarea>
+                <label>Backstories</label>
+                <textarea name="backstories" class="texteditor" required=""><? echo $backstories; ?></textarea>
             </div>
             <div class="form-group">
-                <label>Spesification</label>
-                <textarea name="specification" class="texteditor" id="spesc_texteditor" required=""><? echo $spec; ?></textarea>
-            </div>
-            <div class="form-group">
-                <label>Cover</label>
-                <input type="file" name="cover" required="" />
+                <label>Specification</label>
+                <textarea name="specification" class="texteditor" required=""><? echo $specification; ?></textarea>
             </div>
         </div>
         <!-- /.box-body -->
@@ -106,12 +112,10 @@ if (isset($er_msg)){
     $(document).ready(function() {
         $('.select2-multiple').select2({
             theme: "bootstrap",
-            width: null
+            width: null,
+            placeholder: '-- select --'
         });
-        CKEDITOR.replace('desc_texteditor');
-        CKEDITOR.replace('spesc_texteditor');
     });
-
     var value = $('#color').val();
     $.each(value.split(","), function(i,e){
         $("#multiple option[value='" + e + "']").prop("selected", true);
