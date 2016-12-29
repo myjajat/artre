@@ -72,6 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				if (response != ""){
 				    loadPhotos();
 				} else {
+				    console.log(response);
 				    alert("Something error");
                     $('.overlay').hide();
 				}

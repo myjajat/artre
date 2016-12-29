@@ -113,8 +113,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="<? echo base_url('plugins/slimScroll/jquery.slimscroll.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<? echo base_url('dist/js/app.min.js') ?>"></script>
-<!-- CK Editor -->
-<script src="<? echo base_url('plugins/ckeditor/ckeditor.js') ?>"></script>
 <!-- Select 2 for color -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

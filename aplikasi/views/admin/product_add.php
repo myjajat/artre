@@ -38,7 +38,8 @@ if (isset($er_msg)){
                     <option value="">-- select --</option>
                 <?
                     foreach ($list_categories->result() as $row){
-                        echo '<option value="'.$row->id_category.'">';
+                        $selected = $row->id_category == $id_category ? "selected" : "";
+                        echo '<option value="'.$row->id_category.'" '.$selected.'>';
                         echo $row->category;
                         echo '</option>';
                     }
@@ -59,13 +60,6 @@ if (isset($er_msg)){
                         <span class="input-group-addon">Rp.</span>
                         <input type="number" class="form-control" name="discount" value="<? echo $discount; ?>" min="0" />
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Discount</label>
-                <div class="input-group">
-                    <span class="input-group-addon">Rp.</span>
-                    <input type="number" class="form-control" name="discount2" value="" />
                 </div>
             </div>
             <div class="form-group ">

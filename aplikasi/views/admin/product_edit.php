@@ -20,7 +20,7 @@ $discount = empty($discount)? $row->discount : $discount;
 $colors = empty($colors)? $row->colors : $colors;
 $backstories = empty($backstories)? $row->backstories : $backstories;
 $specification = empty($specification)? $row->specification : $specification;
-$id_category = empty($specification)? $row->id_category : $id_category;
+$id_category = empty($id_category)? $row->id_category : $id_category;
 
 if (isset($er_msg)){
     echo $this->mylib->create_msg($er_msg, 'danger');
@@ -68,13 +68,6 @@ if (isset($er_msg)){
                         <span class="input-group-addon">Rp.</span>
                         <input type="number" class="form-control" name="discount" value="<? echo $discount; ?>" min="0" />
                     </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Discount</label>
-                <div class="input-group">
-                    <span class="input-group-addon">Rp.</span>
-                    <input type="number" class="form-control" name="discount2" value="" />
                 </div>
             </div>
             <div class="form-group ">
