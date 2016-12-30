@@ -58,3 +58,5 @@ $route['administrator/story/edit/(:num)'] = 'administrator/story_edit/$1';
 $route['administrator/product/add'] = 'administrator/product_add';
 $route['administrator/product/(:num)/photos'] = 'administrator/product_photos/$1';
 $route['administrator/product/edit/(:num)'] = 'administrator/product_edit/$1';
+$route['administrator/banner/add'] = 'administrator/banner_add';
+$route['administrator/banner/edit/(:num)'] = 'administrator/banner_edit/$1';

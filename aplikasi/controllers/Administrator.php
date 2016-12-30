@@ -240,7 +240,7 @@ class Administrator extends CI_Controller {
             $this->db->delete('products_photo');
             if ($this->db->affected_rows() != 0){
                 $this->session->set_flashdata('msg', '1 photo successfully deleted.');
-                $this->session->set_flashdata('msg_type', 'info');
+                $this->session->set_flashdata('msg_type', 'success');
             } else {
                 $this->session->set_flashdata('msg', 'Something error on deleting photo.');
                 $this->session->set_flashdata('msg_type', 'danger');
@@ -330,6 +330,93 @@ class Administrator extends CI_Controller {
         $data['list_categories'] = $this->db->get('categories');
         $data['list_colors'] = $this->db->get('colors');
         $this->show_page('admin/product_edit', $data);
+        return;
+    }
+    
+    /* -- Banners -- */
+    
+    public function banners(){
+        if (isset($_POST['delete'])){
+            $id_banner = $this->input->post('id_banner', true);
+            $this->db->limit(1);
+            $this->db->delete('banners');
+            if ($this->db->affected_rows() != 0){
+                $this->session->set_flashdata('msg', '1 banner successfully deleted');
+                $this->session->set_flashdata('msg_type', 'success');
+            } else {
+                $this->session->set_flashdata('msg', 'The banner can not be deleted');
+                $this->session->set_flashdata('msg_type', 'danger');
+            }
+            redirect('administrator/banners');
+        }
+        
+        $this->db->order_by('id_banner', 'DESC');
+        $query = $this->db->get('banners');
+        $data['query'] = $query;
+        $this->show_page('admin/banners', $data);
+    }
+    
+    public function banner_add(){
+        if (isset($_FILES['banner'])){
+            $upload = $this->upload_image('banner', 'banners');
+            if ($upload['success']){
+                $this->db->set('filename', $upload['file_name']);
+                $this->db->set('link', $this->input->post('link', true));
+                $this->db->set('title', $this->input->post('title', true));
+                $this->db->set('sub_title', $this->input->post('sub_title', true));
+                $this->db->insert('banners');
+                if ($this->db->affected_rows() != 0){
+                    $this->session->set_flashdata('msg', 'New banner successfully uploaded.');
+                    $this->session->set_flashdata('msg_type', 'success');
+                    redirect('administrator/banners');
+                } else {
+                    $data['er_msg'] = 'Something error on saving new banner';
+                }
+            } else {
+                $data['er_msg'] = $upload['msg'];
+            }
+        }
+        $this->show_page('admin/banner_add');
+    }
+    
+    public function banner_edit($id_banner){
+        $this->db->where('id_banner', $id_banner);
+        $query = $this->db->get('banners', 1);
+        if ($query->num_rows() == 0){
+            $this->session->set_flashdata('msg', 'Banner not found');
+            $this->session->set_flashdata('msg_type', 'danger');
+            redirect('administrator/banners');
+        }
+        
+        $upload['msg'] = '';
+        if (!empty($_FILES['cover']['name'])){
+            $upload = $this->upload_image('cover', 'stories');
+            if ($upload['success']){
+                $this->db->set('cover', $upload['file_name']);
+            } else {
+                $data['er_msg'] = $upload['msg'];
+            }
+        }
+        
+        if (isset($_POST['title']) && $upload['msg'] == ''){
+            $this->db->set('title', $this->input->post('title', true));
+            $this->db->set('story', $this->input->post('story'));
+            $this->db->set('creator', $this->input->post('creator', true));
+            $this->db->set('link', $this->input->post('link', true));
+            $this->db->where('id_story', $id_story);
+            $this->db->limit(1);
+            $this->db->update('stories');
+            if ($this->db->affected_rows() == 1){
+                $this->session->set_flashdata('msg', '1 story successfully edited.');
+                $this->session->set_flashdata('msg_type', 'success');
+                redirect('administrator/stories');
+            } else {
+                $data['er_msg'] = "Something error on saving data.";
+            }
+        }
+        
+        $data['row'] = $query->row();
+        $this->show_page('admin/story_edit', $data);
         return;
     }
 }

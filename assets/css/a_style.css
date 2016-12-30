@@ -1,0 +1,12 @@
+img.media-object {
+    height: 64px;
+}
+
+.media {
+    padding-left: 0;
+    transition: padding-left 0.3s;
+}
+
+.media:hover {
+    padding-left: 10px;
+}

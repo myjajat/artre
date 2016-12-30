@@ -29,6 +29,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link href="https://select2.github.io/select2-bootstrap-theme/css/select2-bootstrap.css" rel="stylesheet" />
     <!-- include summernote css-->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="<? echo base_url('assets/css/a_style.css') ?>" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -71,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- Optionally, you can add icons to the links -->
         <li id="products"><a href="<? echo site_url('administrator/products') ?>"><i class="fa fa-shopping-cart"></i> <span>Products</span></a></li>
         <li id="stories"><a href="<? echo site_url('administrator/stories') ?>"><i class="fa fa-newspaper-o"></i> <span>Stories</span></a></li>
-        <li id="banners"><a href="#"><i class="fa fa-picture-o"></i> <span>Home Banners</span></a></li>
+        <li id="banners"><a href="<? echo site_url('administrator/banners') ?>"><i class="fa fa-picture-o"></i> <span>Home Banners</span></a></li>
         <li id="subscriber"><a href="<? echo site_url('administrator/subscribers') ?>"><i class="fa fa-envelope"></i> <span>Subscriber</span></a></li>
         <li class="header">ACCOUNT</li>
         <li id="password"><a href="#"><i class="fa fa-key"></i> <span>Change Password</span></a></li>
