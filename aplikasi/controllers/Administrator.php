@@ -35,8 +35,14 @@ class Administrator extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        if ($this->session->userdata('login') == TRUE){
-            
+        if(empty($this->session->has_userdata('sid'))){
+            redirect('auth/login');
+        }else{
+            $this->db->where('sid',$this->session->userdata('sid'));
+            $result = $this->db->get('users');
+            if($result->num_rows() <= 0){
+                redirect('auth/login');
+            }
         }
     }
     
@@ -44,10 +50,36 @@ class Administrator extends CI_Controller {
 	{
 		$this->load->view('admin/layout');
 	}
-    
-    public function logout(){
-        $this->session->destroy();
-        redirect('login');
+
+    public function change_password(){
+
+        $old_password = $this->input->post('old_password');
+        $new_password = $this->input->post('new_password');
+        $confirmation = $this->input->post('confirm_password');
+        $data         = array();
+
+        if(!empty($old_password) && !empty($new_password) && !empty($confirmation)){
+            $this->db->where('password',md5($old_password));
+            $result = $this->db->get('users',1);
+            if($result->num_rows() > 0){
+                if($new_password == $confirmation){
+                    $this->db->set('password',md5($new_password));
+                    $this->db->where('password',md5($old_password));
+                    $this->db->update('users');
+
+                    $data['msg'] = "Your Password Successfully Changed";
+                    $data['type']= "text-success";
+                }else{
+                    $data['msg'] = "Confirm Password Is Not Match";
+                    $data['type']= "text-danger";
+                }
+            }else{
+                $data['msg'] = "Your Current Password Is Invalid";
+                $data['type']= "text-danger";
+            }
+        }
+
+        $this->show_page('admin/password',$data);
     }
     
     public function stories($page = 1){

@@ -76,8 +76,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <li id="banners"><a href="<? echo site_url('administrator/banners') ?>"><i class="fa fa-picture-o"></i> <span>Home Banners</span></a></li>
         <li id="subscriber"><a href="<? echo site_url('administrator/subscribers') ?>"><i class="fa fa-envelope"></i> <span>Subscriber</span></a></li>
         <li class="header">ACCOUNT</li>
-        <li id="password"><a href="#"><i class="fa fa-key"></i> <span>Change Password</span></a></li>
-        <li id="logout"><a href="#"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
+        <li id="password"><a href="<? echo site_url('administrator/change_password'); ?>"><i class="fa fa-key"></i> <span>Change Password</span></a></li>
+        <li id="logout"><a href="<? echo site_url('auth/logout'); ?>"><i class="fa fa-power-off"></i> <span>Logout</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
