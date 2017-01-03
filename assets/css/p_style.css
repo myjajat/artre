@@ -178,3 +178,72 @@ body {
     margin: 10px;
     height: 100px;
 }
+
+.list-category {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-category li {
+    padding: 10px;
+}
+
+.list-products {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-category a {
+    color: #4e5836;
+}
+
+.list-products li {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.list-products a {
+    color: #4e5836;
+}
+
+.list-products a:hover, .list-products a:focus {
+    text-decoration: none;
+}
+
+.list-products .photo-frame {
+    width: 180px; height: 180px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.list-products .photo {
+    width: inherit; height: inherit;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+    
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -ms-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out;
+    
+    -webkit-transform: scale(1,1);
+    -moz-transform: scale(1,1);
+    -ms-transform: scale(1,1);
+    -o-transform: scale(1,1);
+    transform: scale(1,1);
+}
+
+.list-products a:hover .photo {
+    -webkit-transform: scale(1.2,1.2);
+    -moz-transform: scale(1.2,1.2);
+    -ms-transform: scale(1.2,1.2);
+    -o-transform: scale(1.2,1.2);
+    transform: scale(1.2,1.2);
+}
+
+.list-products .color {
+    width: 15px; height: 15px;
+    display: inline-block;
+}

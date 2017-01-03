@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         foreach ($query->result() as $row){
             echo '<div class="media">';
             echo '<div class="pull-right">';
-            echo '<a class="btn btn-info btn-xs" title="Edit" href="'.site_url('administrator/banner/edit/'.$row->id_banner).'"><span class="glyphicon glyphicon-pencil"></span></a> ';
+            echo '<a class="btn btn-success btn-xs" title="Edit" href="'.site_url('administrator/banner/edit/'.$row->id_banner).'"><span class="glyphicon glyphicon-pencil"></span></a> ';
             echo '<a href="#" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target=".modal" onclick="$(\'#id_banner\').val('.$row->id_banner.');"><span class="glyphicon glyphicon-trash"></span></a>';
             echo '</div>';
             echo '<div class="media-left">';

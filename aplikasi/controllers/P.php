@@ -48,7 +48,7 @@ class P extends CI_Controller {
     }
     
     public function products(){
-        
+        $this->show_page('public/products');
     }
 }
 ?>
