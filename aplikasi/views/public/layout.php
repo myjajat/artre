@@ -26,6 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="<? echo base_url('plugins/jQuery/jquery-2.2.3.min.js') ?>"></script>
 </head>
 
 <body>
@@ -43,12 +44,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <a class="navbar-brand visible-xs-block" href="#">Menu Active</a>
         </div>
         <div class="collapse navbar-collapse top-nav">
-            <ul class="nav nav-justified">
-                <li><a href="<? echo site_url('') ?>">Home</a></li>
-                <li><a href="<? echo site_url('p/about') ?>">About</a></li>
-                <li><a href="<? echo site_url('p/products') ?>">Products</a></li>
-                <li><a href="<? echo site_url('p/stories') ?>">Stories</a></li>
-                <li><a href="<? echo site_url('p/contact') ?>">Contact</a></li>
+            <ul class="nav">
+                <li class="col-sm-2"><a href="<? echo site_url('p/home') ?>">Home</a></li>
+                <li class="col-sm-3"><a href="<? echo site_url('p/about') ?>">About</a></li>
+                <li class="col-sm-2"><a href="<? echo site_url('p/products') ?>">Products</a></li>
+                <li class="col-sm-3"><a href="<? echo site_url('p/stories') ?>">Stories</a></li>
+                <li class="col-sm-2"><a href="<? echo site_url('p/contact') ?>">Contact</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
@@ -65,13 +66,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="footer" >
         <div class="sosmed">
             <a href="#" target="_blank">
-                <img src="<? echo base_url('assets/images/sosmed-tw.png') ?>" height="22px" />
+                <img src="<? echo base_url('assets/images/sosmed-tw.png') ?>"/>
             </a>
             <a href="#" target="_blank">
-                <img src="<? echo base_url('assets/images/sosmed-ig.png') ?>" height="22px" />
+                <img src="<? echo base_url('assets/images/sosmed-ig.png') ?>"/>
             </a>
             <a href="#" target="_blank">
-                <img src="<? echo base_url('assets/images/sosmed-fb.png') ?>" height="22px" />
+                <img src="<? echo base_url('assets/images/sosmed-fb.png') ?>"/>
             </a>
             <div class="copyright pull-right">
                 2016 Moegi Std.
@@ -80,7 +81,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
-<script src="<? echo base_url('plugins/jQuery/jquery-2.2.3.min.js') ?>"></script>
 <script src="<? echo base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
 <script src="<? echo base_url('plugins/slimScroll/jquery.slimscroll.min.js') ?>"></script>
 <script src="<? echo base_url('assets/js/main.js') ?>"></script>

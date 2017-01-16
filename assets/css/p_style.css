@@ -1,4 +1,4 @@
-@font-face { font-family: NexaSlab; src: url("../fonts/ROCK.TTF"); }
+@font-face { font-family: NexaSlab; src: url("../fonts/newscycle-regular.ttf"); }
 
 * {
     font-family: NexaSlab;
@@ -7,7 +7,7 @@
 
 body {
     color: #4e5836; /* rgb(78,88,54) */
-    font-size: 12pt;
+    font-size: 11pt;
 }
 
 .container {
@@ -26,6 +26,7 @@ body {
 .top-nav a {
     text-transform: uppercase;
     color: #4e5836;
+    font-weight: bold;
 }
 
 .top-nav a:hover, .top-nav a.active, .top-nav a:focus {
@@ -35,10 +36,21 @@ body {
     outline: none;
 }
 
+.nav {
+    text-align: center;
+    padding: 0;
+}
+
+.nav > li{
+    text-align: center;
+    padding: 0;
+}
+
 .footer {
     background-color: #4e5836;
     padding: 20px;
     color: white;
+    font-size: 11pt;
 }
 
 .footer a {
@@ -47,6 +59,10 @@ body {
 
 .footer .copyright {
     color: white;
+}
+
+.footer .sosmed img {
+    height: 1.2em;
 }
 
 .page-title {
@@ -60,14 +76,14 @@ body {
 
 .sub-title {
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: gray;
     margin-bottom: 20px;
 }
 
 .page-title img { height: 10pt; margin: 3px; }
 
-.list-stories > div { text-align: center; margin-bottom: 30px; }
+.list-stories > div { text-align: center; margin-bottom: 30px; font-weight: bold; }
 .list-stories .box-story{ 
     width: 300px; height: 300px; vertical-align: middle; 
 }
@@ -75,6 +91,7 @@ body {
 .box-story{
     position: relative;
     overflow: hidden;
+    display: inline-block;
 }
 
 .box-story .bg {
@@ -134,8 +151,12 @@ body {
     /*font-weight: bold;*/
 }
 
-.box-story .btn { 
+.box-story .btn, .carousel-caption .btn { 
     background-color: #4e5836; color: #fdbc00; 
+}
+
+.box-story .btn:hover, .carousel-caption .btn:hover {
+    background-color: #5f6947;
 }
 
 .load-more .box-story {
@@ -161,7 +182,6 @@ body {
 
 .story article {
     margin: 20px 0;
-    text-align: center;
 }
 
 .story-date {
@@ -181,11 +201,11 @@ body {
 
 .list-category {
     list-style: none;
-    padding-left: 0;
+    padding-left: 10px;
 }
 
 .list-category li {
-    padding: 10px;
+    padding: 9px;
 }
 
 .list-products {
@@ -199,7 +219,8 @@ body {
 
 .list-products li {
     text-align: center;
-    margin-bottom: 25px;
+    margin: 10px 0;
+    height: 16em;
 }
 
 .list-products a {
@@ -243,7 +264,91 @@ body {
     transform: scale(1.2,1.2);
 }
 
-.list-products .color {
+.list-products .name {
+    max-height: 3em;
+    overflow: hidden;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.list-products .color, .product-detail .color {
     width: 15px; height: 15px;
     display: inline-block;
+}
+
+.list-products .loading {
+    text-align: center;
+    clear: both;
+    display: none;
+}
+
+.loading {
+    text-align: center;
+}
+
+.loading img {
+    margin-top: -30px;
+}
+
+del {
+    color: red;
+}
+
+.photos {
+    text-align: center;
+}
+
+.product-detail .photo-utama {
+    width: 530px; height: 530px; /* 280 */
+    max-width: 100%;
+    display: inline-block;
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: background-image 0.7s;
+}
+
+.product-detail .list-photo a {
+    display: inline-block;
+    width: 130px; height: 130px;
+    /*height: 130px;*/
+    /*border: 1px solid silver;
+    /*margin: 3px;*/
+    padding: 5px;
+    cursor: pointer;
+    background-size: cover;
+}
+
+.product-detail .list-photo a:hover {
+    /*border: 1px solid #fdbc00;*/
+}
+
+.product-detail h1 {
+    margin-top: 0;
+}
+
+.no-more {
+    display: none;
+    clear: both;
+}
+
+.carousel-inner .active {
+    width: inherit; height: inherit;
+}
+
+.carousel-inner img {
+    width: inherit;
+}
+
+.home a {
+    color: #4e5836;
+}
+
+.home .title {
+    font-weight: bold;
+}
+
+.home .more:hover, .carousel-control:hover {
+    color: #fdbc00;
+    text-decoration: none;
 }

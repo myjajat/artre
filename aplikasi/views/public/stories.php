@@ -30,24 +30,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             echo "</div></div></div></div>";
         }
     ?>
-    <div class="col-sm-6 col-md-4 load-more">
-        <div class="box-story" onclick="load_more()">
-            <div class="bg" style="background-image: url('<? echo base_url('assets/images/load-more.jpg') ?>');"></div>
-        </div>
-    </div>
 </div>
+<div class="loading"><img src="<? echo base_url('assets/images/loading26.gif') ?>" /></div>
+<div class="alert alert-info no-more">-- No more story --</div>
 
 <script>
-    var cur_offset = 8;
-    function load_more(){
+var cur_offset = 9;
+var loading = false;
+$(window).scroll(function(){
+    if($(window).scrollTop() == $(document).height() - $(window).height() && loading == false){
+        loading = true; $(".loading").show();
         $.get("<? echo site_url('p/stories_ajax') ?>", { offset: cur_offset })
          .done(function(data){
+            $(".loading").hide();
             if (data != ""){
-                $(".load-more").before(data);
+                $(".loading").before(data);
                 cur_offset += 9;
+                loading = false;
             } else {
-                $(".load-more").hide();
+                $(".no-more").show("fast");
+                setTimeout(function(){
+                    $(".no-more").hide("slow");
+                }, 3000);
             }
          });
     }
+});
 </script>
