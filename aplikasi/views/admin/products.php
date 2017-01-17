@@ -15,13 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <a class="btn btn-success btn-sm pull-left"  style="margin-right: 10px;" href="<? echo site_url('administrator/product/add'); ?>">
                 <span class="glyphicon glyphicon-plus"></span>
             </a>
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
+            <?php echo $pagination; ?>
           </div>
         </div>
         <!-- /.box-header -->

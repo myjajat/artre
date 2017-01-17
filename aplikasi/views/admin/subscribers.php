@@ -12,13 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="box-header with-border">
           <h3 class="box-title">Subscribers</h3>
           <div class="box-tools">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
+            <?php echo $pagination; ?>
           </div>
         </div>
         <!-- /.box-header -->

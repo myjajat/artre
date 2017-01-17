@@ -27,7 +27,6 @@ class Auth extends CI_Controller
                 $this->db->update('users');
 
                 $this->session->set_userdata('sid', $sid);
-                $this->session->mark_as_temp('sid', 900);
                 redirect('administrator');
             }else{
                 $data['msg'] = "Username Or Password Is Invalid";

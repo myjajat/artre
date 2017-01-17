@@ -35,6 +35,7 @@ class Administrator extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('pagination');
         if(!$this->session->has_userdata('sid')){
             redirect('auth/login');
         }else{
@@ -82,7 +83,7 @@ class Administrator extends CI_Controller {
         $this->show_page('admin/password',$data);
     }
     
-    public function stories($page = 1){
+    public function stories(){
         if (isset($_POST['delete'])){
             $this->db->where('id_story', $this->input->post('id_story', true));
             $this->db->limit(1);
@@ -97,12 +98,21 @@ class Administrator extends CI_Controller {
             redirect('administrator/stories');
         }
         
-        $page = $page < 1 ? 1 : $page;
-        $limit = 10;
-        $offset = $limit * ($page - 1);
+        $limit  = 10;
+        $offset = $this->uri->segment(3) != "" ? $this->uri->segment(3) : 0;
         
         $this->db->order_by('insert_date', 'DESC');
         $data['query'] = $this->db->get('stories', $limit, $offset);
+
+        $config['base_url']        = base_url('index.php/administrator/stories');
+        $config['per_page']        = $limit;
+        $config['total_rows']      = $this->db->count_all('stories'); ;
+        $config['num_links']       = 10;
+
+        $this->pagination->initialize($config);
+
+        $data['pagination'] = $this->pagination->create_links();
+
         $this->show_page('admin/stories', $data);
     }
     
@@ -177,7 +187,7 @@ class Administrator extends CI_Controller {
         return;
     }
     
-    public function subscribers($page = 1){
+    public function subscribers(){
         if (isset($_POST['delete'])){
             $this->db->where('id_subscriber', $this->input->post('id_subscriber', true));
             $this->db->limit(1);
@@ -192,16 +202,25 @@ class Administrator extends CI_Controller {
             redirect('administrator/subscribers');
         }
         
-        $page = $page < 1 ? 1 : $page;
-        $limit = 10;
-        $offset = $limit * ($page - 1);
+        $limit  = 10;
+        $offset = $this->uri->segment(3) != "" ? $this->uri->segment(3) : 0;
         
         $this->db->order_by('id_subscriber', 'DESC');
         $data['query'] = $this->db->get('subscribers', $limit, $offset);
+
+        $config['base_url']        = base_url('index.php/administrator/subscribers');
+        $config['per_page']        = $limit;
+        $config['total_rows']      = $this->db->count_all('subscribers'); ;
+        $config['num_links']       = 10;
+
+        $this->pagination->initialize($config);
+
+        $data['pagination'] = $this->pagination->create_links();
+        
         $this->show_page('admin/subscribers', $data);
     }
     
-    public function products($page = 1){
+    public function products(){
         if (isset($_POST['delete'])){
             $this->db->where('id_product', $this->input->post('id_product', true));
             $this->db->limit(1);
@@ -216,18 +235,26 @@ class Administrator extends CI_Controller {
             redirect('administrator/products');
         }
         
-        $page = $page < 1 ? 1 : $page;
-        $limit = 10;
-        $offset = $limit * ($page - 1);
-        
-        $this->db->order_by('insert_date', 'DESC');
-        $sql = "SELECT products.*, categories.category
-                FROM products
-                LEFT JOIN categories
-                ON products.id_category = categories.id_category
-                ORDER BY id_product DESC
-                LIMIT $offset, $limit";
-        $data['query'] = $this->db->query($sql);
+        $limit  = 10;
+        $offset = $this->uri->segment(3) != "" ? $this->uri->segment(3) : 0;
+
+        $sql    = "SELECT products.*, categories.category
+                    FROM products
+                    LEFT JOIN categories
+                    ON products.id_category = categories.id_category
+                    ORDER BY insert_date DESC
+                    LIMIT $limit OFFSET $offset";
+        $query  = $this->db->query($sql);
+
+        $config['base_url']        = base_url('index.php/administrator/products');
+        $config['per_page']        = $limit;
+        $config['total_rows']      = $this->db->count_all('products'); ;
+        $config['num_links']       = 10;
+
+        $this->pagination->initialize($config);
+
+        $data['pagination'] = $this->pagination->create_links();
+        $data['query']      = $query;
         $this->show_page('admin/products', $data);
     }
     
