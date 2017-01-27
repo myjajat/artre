@@ -14,7 +14,7 @@ class P extends CI_Controller {
     }
     
 	public function index(){
-		$this->home();
+		redirect('p/home');
 	}
     
     public function home(){
@@ -128,7 +128,106 @@ class P extends CI_Controller {
         $query = $this->db->get('products_photo');
         $data['photos'] = $query;
         
+        $query = $this->db->get('colors');
+        $data['tbl_colors'] = $query;
+        
         $this->show_page('public/product_detail', $data);
+    }
+    
+    public function product_order($id_product){
+        $this->show_page('public/product_order');
+    }
+    
+    public function contact(){
+        if (isset($_POST['name'])){
+            $name = $this->input->post('name', true);
+            $phone = $this->input->post('phone', true);
+            $email = $this->input->post('email', true);
+            $subject = $this->input->post('subject', true);
+            $message = $this->input->post('message', true);
+            
+            $content = "";
+            $this->sendEmail('New [message] from '.$name, $content);
+        }
+        $this->show_page('public/contact');
+    }
+    
+    public function about(){
+        $this->show_page('public/about');
+    }
+    
+    public function send_message(){
+        if (isset($_POST['name']) && !empty($_POST['message'])){
+            $name = $this->input->post('name', true);
+            $phone = $this->input->post('phone', true);
+            $email = $this->input->post('email', true);
+            $subject = $this->input->post('subject', true);
+            $message = $this->input->post('message', true);
+            
+            $content = "
+                Website artreoutgear.id baru saja mendapatkan pesan baru melalui halaman Contact \n
+                dengan detail berikut: \n
+                -- \n
+                Nama : $name \n
+                Phone Number : $phone \n
+                Email : $email \n
+                -- \n
+                Subject : $subject \n
+                Message : \n
+                $message \n
+                -- \n
+                This email is automatically send by artreoutgear.id\n
+                Do not reply!
+            ";
+            $this->sendEmail('New [message] '.$subject, $content);
+            echo 'aaa';
+        }
+        echo 'bbb';
+    }
+    
+    public function submit_order(){
+        if (isset($_POST['product']) && !empty($_POST['name'])){
+            $name = $this->input->post('name', true);
+            $phone = $this->input->post('phone', true);
+            $email = $this->input->post('email', true);
+            $address = $this->input->post('address', true);
+            $color = $this->input->post('color');
+            $size = $this->input->post('size');
+            $note = $this->input->post('note', true);
+            $product = $this->input->post('product');
+            
+            $content = "
+                Website artreoutgear.id baru saja mendapatkan order dengan detail:\n
+                --\n
+                Name : $name \n
+                Phone Number : $phone \n
+                Email : $email \n
+                Address : $address \n
+                --\n
+                Product : $product \n
+                Color : $color \n
+                Size : $size \n
+                --\n
+                Extra Note : $note \n
+                --\n
+                This email is automatically send by artreoutgear.id\n
+                Do not reply!
+            ";
+            $this->sendEmail('New [order] '.$product, $content);
+        }
+    }
+    
+    private function sendEmail($subject, $content){
+        $this->load->library('email');
+
+        $this->email->from('sistem@artreoutgear.id', 'Artre Outgear');
+        $this->email->to('myjajat@gmail.com');
+        $this->email->cc('rahmandikasoepian@gmail.com');
+        
+        $this->email->subject($subject);
+        $this->email->message($content);
+        
+        $this->email->send();
     }
 }
 ?>

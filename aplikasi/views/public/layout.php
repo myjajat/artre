@@ -68,10 +68,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <a href="#" target="_blank">
                 <img src="<? echo base_url('assets/images/sosmed-tw.png') ?>"/>
             </a>
-            <a href="#" target="_blank">
+            <a href="https://www.instagram.com/artreoutgear/" target="_blank">
                 <img src="<? echo base_url('assets/images/sosmed-ig.png') ?>"/>
             </a>
-            <a href="#" target="_blank">
+            <a href="https://www.facebook.com/artreoutgear" target="_blank">
                 <img src="<? echo base_url('assets/images/sosmed-fb.png') ?>"/>
             </a>
             <div class="copyright pull-right">

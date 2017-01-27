@@ -16,6 +16,7 @@ body {
 
 .btn {
     border-radius: 0 !important;
+    font-weight: bold;
 }
 
 .logo {
@@ -351,4 +352,14 @@ del {
 .home .more:hover, .carousel-control:hover {
     color: #fdbc00;
     text-decoration: none;
+}
+
+.order-status {
+    padding: 7px 12px;
+    font-size: 14px;
+    text-align: left;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-weight: bold;
+    display: none;
 }

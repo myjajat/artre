@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?
             foreach ($query->result() as $row){
                 echo '<li class="col-md-4 col-sm-6">';
-                echo '<a href="'.site_url('p/product_detail/'.$row->id_product).'">';
+                echo '<a href="'.site_url('p/products/detail/'.$row->id_product.'/'.$row->name).'">';
                 echo '<div class="photo-frame">';
                 echo '<div class="photo" style="background-image: url(\''.base_url('assets/images/products/'.$row->filename).'\');"></div>';
                 echo '</div>';

@@ -26,7 +26,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             echo "<div class='bg-kuning'>";
             echo "<div>";
             echo "<div class='title'>".$row->title."</div>";
-            echo "<a href='".site_url('p/story/'.$row->id_story.'/'.$row->title)."' class='btn'>EXPLORE</a>";
+            echo "<a href='".site_url('p/stories/detail/'.$row->id_story.'/'.$row->title)."' class='btn'>EXPLORE</a>";
             echo "</div></div></div></div>";
         }
     ?>
