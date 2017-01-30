@@ -25,6 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </a>
             </div>
         </div>
+        <div class="box-footer">
+            <a href="<? echo site_url('administrator/products') ?>" class="btn btn-success pull-right">Done</a>
+        </div>
         <!-- Loading (remove the following to stop the loading) -->
         <div class="overlay" style="display: none;">
           <i class="fa fa-refresh fa-spin"></i>

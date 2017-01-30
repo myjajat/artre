@@ -15,8 +15,10 @@ foreach ($tbl_colors->result() as $row){
 ?>
 
 <div class="row product-detail">
-    <div class="col-sm-7 photos" style="margin-bottom: 20px; padding-right: 50px;">
-        <div class="photo-utama" style="background-image: url('<? echo base_url('assets/images/products/'.$photos->row(0)->filename) ?>');"></div>
+    <div class="col-sm-7 photos" style="margin-bottom: 20px;">
+        <figure>
+            <div class="photo-utama" style="background-image: url('<? echo base_url('assets/images/products/'.$photos->row(0)->filename) ?>');"></div>
+        </figure>
         <div class="list-photo row">
         <?
             foreach ($photos->result() as $row){
@@ -153,7 +155,9 @@ foreach ($tbl_colors->result() as $row){
          .fail(function(){
             $('.order-status').addClass('alert-danger');
             $('.order-status').text('Oh, sorry! Order failed. Try Again');
-            $('#formOrder button').show();
+            setTimeout(function(){
+                $('#formOrder button').show();
+            }, 5000);
          });
          
          return false;

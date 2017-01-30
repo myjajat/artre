@@ -9,12 +9,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8" />
     <meta http-equiv="content-type" content="text/html" />
-	<meta name="author" content="moegi" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+    
+	<meta name="author" content="moegi" />
+    <meta name="description" content="Modern outdoor apparel for adventurous living. Produk durable tanpa melupakan estetika. Harga terjangkau tanpa mengorbankan kualitas." />
+    <meta name="keywords" content="artre, artre outgear, outdoor apprarel, #betteroutdoor, adventure, clothing, fieldwalker" />
+    
     <title>Artre Outgear Outdoor Apparel</title>
 
 	<link rel="shortcut icon" href="<? echo base_url('favicon.ico') ?>" />
@@ -32,24 +36,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 <div class="container">
     <div class="logo">
-        <img src="<? echo base_url('assets/images/logo-text.png') ?>" height="170px" />
+        <a href="<? echo site_url('p/home'); ?>">
+            <img src="<? echo base_url('assets/images/logo-text.png') ?>" height="170px" />
+        </a>
     </div>
-    <nav class="navbar">
+    <nav class="navbar navbar-default">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".top-nav" aria-expanded="false">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand visible-xs-block" href="#">Menu Active</a>
+            <a class="navbar-brand visible-xs-block" href="#"></a>
         </div>
         <div class="collapse navbar-collapse top-nav">
             <ul class="nav">
-                <li class="col-sm-2"><a href="<? echo site_url('p/home') ?>">Home</a></li>
-                <li class="col-sm-3"><a href="<? echo site_url('p/about') ?>">About</a></li>
-                <li class="col-sm-2"><a href="<? echo site_url('p/products') ?>">Products</a></li>
-                <li class="col-sm-3"><a href="<? echo site_url('p/stories') ?>">Stories</a></li>
-                <li class="col-sm-2"><a href="<? echo site_url('p/contact') ?>">Contact</a></li>
+                <li class="col-sm-2" id="mHOME"><a href="<? echo site_url('p/home') ?>">Home</a></li>
+                <li class="col-sm-3" id="mABOUT"><a href="<? echo site_url('p/about') ?>">About</a></li>
+                <li class="col-sm-2" id="mPRODUCTS"><a href="<? echo site_url('p/products') ?>">Products</a></li>
+                <li class="col-sm-3" id="mSTORIES"><a href="<? echo site_url('p/stories') ?>">Stories</a></li>
+                <li class="col-sm-2" id="mCONTACT"><a href="<? echo site_url('p/contact') ?>">Contact</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
@@ -84,5 +90,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="<? echo base_url('bootstrap/js/bootstrap.min.js') ?>"></script>
 <script src="<? echo base_url('plugins/slimScroll/jquery.slimscroll.min.js') ?>"></script>
 <script src="<? echo base_url('assets/js/main.js') ?>"></script>
+<script>
+    $(function(){
+        setMenuActive('<? echo strtoupper($this->uri->segment('2','')); ?>');
+    });
+</script>
 </body>
 </html>

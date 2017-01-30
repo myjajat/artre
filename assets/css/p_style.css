@@ -24,6 +24,10 @@ body {
     padding: 20px 0;
 }
 
+.navbar-brand {
+    font-weight: bold;
+}
+
 .top-nav a {
     text-transform: uppercase;
     color: #4e5836;
@@ -52,6 +56,7 @@ body {
     padding: 20px;
     color: white;
     font-size: 11pt;
+    margin-top: 40px;
 }
 
 .footer a {
@@ -309,15 +314,20 @@ del {
     transition: background-image 0.7s;
 }
 
+.product-detail .list-photo {
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .product-detail .list-photo a {
     display: inline-block;
     width: 130px; height: 130px;
-    /*height: 130px;*/
-    /*border: 1px solid silver;
-    /*margin: 3px;*/
+    margin-bottom: 15px;
     padding: 5px;
     cursor: pointer;
     background-size: cover;
+    background-position: center;
 }
 
 .product-detail .list-photo a:hover {
@@ -362,4 +372,22 @@ del {
     vertical-align: middle;
     font-weight: bold;
     display: none;
+}
+
+@media only screen and (max-width: 992px){
+    .product-detail .list-photo a {
+        width: 110px; height: 110px;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .navbar {
+        background-color: transparent;
+        border: 0;
+    }
+    
+    .top-nav li.active a {
+        background: url('../images/pointer-1.png') no-repeat bottom center;
+        background-size: 70px;
+    }
 }

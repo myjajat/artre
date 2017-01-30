@@ -60,7 +60,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          .fail(function(){
             $('.order-status').addClass('alert-danger');
             $('.order-status').text('Sorry! Your message can not be send. Try again');
-            $('#formContact button').prop('disabled', false);
+            setTimeout(function(){
+                $('#formContact button').prop('disabled', false);
+            }, 5000);
          })
          .done(function( data ){
             if (data == ""){
@@ -71,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         this.reset();
                     });
                     $('#formContact button').prop('disabled', false);
-                }, 3000);
+                }, 5000);
             } else {
                 $('.order-status').addClass('alert-danger');
                 $('.order-status').text('Sorry! Your message can not be send. Try again');

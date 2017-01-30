@@ -165,24 +165,20 @@ class P extends CI_Controller {
             $message = $this->input->post('message', true);
             
             $content = "
-                Website artreoutgear.id baru saja mendapatkan pesan baru melalui halaman Contact \n
-                dengan detail berikut: \n
-                -- \n
-                Nama : $name \n
-                Phone Number : $phone \n
-                Email : $email \n
-                -- \n
-                Subject : $subject \n
-                Message : \n
-                $message \n
-                -- \n
-                This email is automatically send by artreoutgear.id\n
-                Do not reply!
-            ";
+Anda baru saja mendapatkan pesan baru dari halaman Contact dengan detail berikut:
+
+Nama : $name
+Phone Number : $phone
+Email : $email
+
+Subject : $subject
+Message : 
+$message
+
+This email is automatically send by sistem artreoutgear.id .
+Do not reply!";
             $this->sendEmail('New [message] '.$subject, $content);
-            echo 'aaa';
         }
-        echo 'bbb';
     }
     
     public function submit_order(){
@@ -197,22 +193,20 @@ class P extends CI_Controller {
             $product = $this->input->post('product');
             
             $content = "
-                Website artreoutgear.id baru saja mendapatkan order dengan detail:\n
-                --\n
-                Name : $name \n
-                Phone Number : $phone \n
-                Email : $email \n
-                Address : $address \n
-                --\n
-                Product : $product \n
-                Color : $color \n
-                Size : $size \n
-                --\n
-                Extra Note : $note \n
-                --\n
-                This email is automatically send by artreoutgear.id\n
-                Do not reply!
-            ";
+Anda mendapatkan order baru dengan detail berikut:
+
+Name : $name
+Phone Number : $phone
+Email : $email
+Address : $address
+
+Product : $product
+Color : $color
+Size : $size
+Extra Note : $note
+
+This email is automatically send by sistem artreoutgear.id . 
+Do not reply!";
             $this->sendEmail('New [order] '.$product, $content);
         }
     }
@@ -221,7 +215,7 @@ class P extends CI_Controller {
         $this->load->library('email');
 
         $this->email->from('sistem@artreoutgear.id', 'Artre Outgear');
-        $this->email->to('myjajat@gmail.com');
+        $this->email->to('artreoutgear@gmail.com');
         $this->email->cc('rahmandikasoepian@gmail.com');
         
         $this->email->subject($subject);
